@@ -35,8 +35,6 @@ if ! hash brew 2>/dev/null; then
     fi
 fi
 
-mkdir ~/.dotfiles
-
 ###################################################################################
 # Github...
 ###################################################################################
@@ -45,8 +43,10 @@ mkdir ~/GitHub
 brew cask install github
 
 ###################################################################################
-# Hostname
+# Hostname and .dotfiles storage
 ###################################################################################
+
+mkdir ~/.dotfiles
 
 HOSTNAME=~/.dotfiles/hostname
 if ! test -f "$HOSTNAME"; then
@@ -67,39 +67,42 @@ fi
 # echo "EXIT THE ZSH SHELL AT THE NEXT PROMPT!!!"
 # sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)  --unattended"
 # sed -i.bak 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' .zshrc
- 
-brew cask install downie
-brew cask install vlc
+
+###################################################################################
+# Casks
+###################################################################################
+
+#brew cask install downie
+#brew cask install vlc
 #brew cask install vyprvpn
-brew cask install visual-studio-code
-code --install-extension stevemoser.xcode-keybindings
-brew cask install easyeda
-brew cask install cleanmymac
-brew cask install netnewswire
-brew cask install sketch
+#brew cask install visual-studio-code
+#code --install-extension stevemoser.xcode-keybindings
+#brew cask install easyeda
+#brew cask install cleanmymac
+#brew cask install netnewswire
+#brew cask install sketch
 brew cask install google-chrome
-brew cask install bartender
-brew cask install bricklink-studio 
+#brew cask install bartender
+#brew cask install bricklink-studio 
+
+###################################################################################
+# Mac app store
+###################################################################################
 
 brew install mas
-mas lucky Magnet
+#mas lucky Magnet
 mas lucky "1Password 7"
 mas lucky "iStat Menus"
 mas lucky 1Blocker
 mas lucky Cardhop
-mas lucky LanScan
-mas lucky Acorn
-mas lucky DiskMate
-mas lucky Airmail
-mas lucky Fantastical
-mas lucky Tampermonkey
+#mas lucky LanScan
+#mas lucky Acorn
+#mas lucky DiskMate
+#mas lucky Airmail
+#mas lucky Fantastical
+#mas lucky Tampermonkey
 mas lucky Screens
 #mas install 488764545 # The Clock
-
-killall -KILL SystemUIServer
-killall Dock
-killall Safari
-killall Finder
 
 ###############################################################################
 # Mac App Store                                                               #
@@ -145,16 +148,11 @@ defaults write com.apple.iCal "TimeZone support enabled" -bool true
 ###############################################################################
 
 # Remove all default dock apps
-# defaults write com.apple.dock persistent-apps -array
+defaults write com.apple.dock persistent-apps -array
 
 # Only show running apps in dock
 # Revert: defaults write com.apple.dock static-only -bool false; killall Dock
 #defaults write com.apple.dock static-only -bool true
-
-# Only Menubar and Dock in dark mode
-# Revert: defaults delete -g NSRequiresAquaSystemAppearance
-# defaults write -g NSRequiresAquaSystemAppearance -bool Yes
-# defaults write com.apple.dock static-only -bool true
 
 # Automatically hide and show the Dock:
 defaults write com.apple.dock autohide -bool true
@@ -365,6 +363,16 @@ defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextr
 defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.clock" -bool NO
 defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.TimeMachine" -bool YES
 defaults delete com.apple.systemuiserver.menuExtras "/System/Library/CoreServices/Menu Extras/Clock.menu"
+
+###############################################################################
+# Show some changes...
+###############################################################################
+
+killall -KILL SystemUIServer
+killall Dock
+killall Safari
+killall Finder
+
 
 ###############################################################################
 # Xcode and reboot...
