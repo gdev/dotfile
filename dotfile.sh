@@ -102,6 +102,7 @@ osascript -e 'tell application "System Events" to make login item at end with pr
 brew install mas
 #mas lucky Magnet
 mas lucky "1Password 7"
+open "/Applications/1Password 7.app"
 mas lucky "iStat Menus"
 mas lucky 1Blocker
 mas lucky Cardhop
@@ -113,6 +114,10 @@ mas lucky Cardhop
 #mas lucky Tampermonkey
 mas lucky Screens
 #mas install 488764545 # The Clock
+
+# Create some login items...
+osascript -e 'tell application "System Events" to make login item at end with properties {name: "iStat Menus",path:"/Applications/iStat Menus.app", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {name: "Cardhop",path:"/Applications/Cardhop.app", hidden:false}'
 
 ###############################################################################
 # Mac App Store                                                               #
@@ -391,7 +396,4 @@ killall Finder
 echo "Installing Xcode can take awhile. All other config done..."
 mas lucky Xcode
 
-echo "Rebooting..."
-sleep 10
-# Restart so changes take effect!
-# shutdown -r now
+echo "Rebooting to complete setup!"
