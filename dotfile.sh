@@ -35,6 +35,8 @@ if ! hash brew 2>/dev/null; then
     fi
 fi
 
+brew install wget
+
 ###################################################################################
 # Github...
 ###################################################################################
@@ -84,6 +86,13 @@ fi
 brew cask install google-chrome
 #brew cask install bartender
 #brew cask install bricklink-studio 
+
+###################################################################################
+# Phoenix window manager
+###################################################################################
+
+wget https://raw.githubusercontent.com/gdev/dotfiles/master/files/phoenix.js --output-document .phoenix.js
+brew cask install phoenix
 
 ###################################################################################
 # Mac app store
