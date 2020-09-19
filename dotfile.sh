@@ -91,8 +91,9 @@ brew cask install google-chrome
 # Phoenix window manager
 ###################################################################################
 
-wget https://raw.githubusercontent.com/gdev/dotfiles/master/files/phoenix.js --output-document .phoenix.js
+wget https://raw.githubusercontent.com/gdev/dotfile/master/files/phoenix.js --output-document .phoenix.js
 brew cask install phoenix
+osascript -e 'tell application "System Events" to make login item at end with properties {name: "Phoenix",path:"/Applications/Phoenix.app", hidden:false}'
 
 ###################################################################################
 # Mac app store
