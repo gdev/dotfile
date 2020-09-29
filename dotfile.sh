@@ -75,17 +75,19 @@ fi
 ###################################################################################
 
 #brew cask install downie
-#brew cask install vlc
 #brew cask install vyprvpn
-#brew cask install visual-studio-code
-#code --install-extension stevemoser.xcode-keybindings
 #brew cask install easyeda
-#brew cask install cleanmymac
-#brew cask install netnewswire
-#brew cask install sketch
+brew cask install cleanmymac
+brew cask install netnewswire
+brew cask install sketch
 brew cask install google-chrome
+brew cask install vlc
 #brew cask install bartender
-#brew cask install bricklink-studio 
+brew cask install bricklink-studio 
+brew cask install sf-symbols 
+brew cask install nova
+brew cask install tunnelbear
+brew cask install phoenix
 
 ###################################################################################
 # Phoenix window manager
