@@ -155,6 +155,7 @@ function moveLeft(positionsPerScreen) {
     } else if (position.screenIndex > 0) {
         moveWindowToPosition(window, 0, positionsPerScreen - 1, positionsPerScreen);
     }
+    
 }
 
 function maximize() {
@@ -171,9 +172,56 @@ function maximize() {
 // Lauch apps...
 Key.on('t', modifiers, function () { callApp('Terminal'); });
 
+function orderedScreens() {
+    let screens = Screen.all().sort(function(a, b) { return a.visibleFrame().x - b.visibleFrame().x });
+    return screens;
+}
+
+function totalSectors(sectorsPerScreen) {
+    var sectors = orderedScreens().length * sectorsPerScreen;
+    return sectors;
+}
+
+function frameForSector(sector, sectorsPerScreen) {
+    let screenIndex = Math.floor(sector/sectorsPerScreen); 
+    let screen = orderedScreens()[Math.floor(screenIndex)];
+    let sectorWidth = screen.frame().width / sectorsPerScreen;
+    let sectorInScreen = sector % sectorsPerScreen;
+    let origin = screen.frame().x + sectorWidth * sectorInScreen; 
+    let frame = {x: origin, y: screen.visibleFrame().y, width: sectorWidth, height: screen.visibleFrame().height};
+    return frame;
+};
+
+function moveLateral(sectorsPerScreen, sectorMovement) {
+    var window = getCurrentWindow();
+    var currentSector = null
+    for (sectorIndex = 0; sectorIndex < totalSectors(sectorsPerScreen); sectorIndex ++) {
+        let frame = frameForSector(sectorIndex, sectorsPerScreen);
+        if (frame.x <= window.topLeft().x && window.topLeft().x < frame.x + frame.width) {
+            currentSector = sectorIndex;
+        };
+    };
+    if (currentSector != null) {
+        let newSector = currentSector + sectorMovement;
+        if (newSector < 0) newSector = 0;
+        if (newSector >= totalSectors(sectorsPerScreen)) newSector = totalSectors(sectorsPerScreen) - 1;
+        let sectorFrame = frameForSector(newSector, sectorsPerScreen);
+        var y = window.frame().y
+        var height = window.frame().height
+        window.setFrame({ x: sectorFrame.x, y: y, width: sectorFrame.width, height: height });
+    }
+}
+
+Key.on('d', modifiers, function () {
+    Phoenix.log("DEBUG");
+    var sectorsPerScreen = 2;
+    var sectorMovement = 1; // -1, 0 or 1
+    moveLateral(sectorsPerScreen, sectorMovement);
+});
+
 // Move windows...
-Key.on('left', modifiers, function () { moveLeft(2); });
-Key.on('right', modifiers, function () { moveRight(2); });
+Key.on('left', modifiers, function () { moveLateral(2, -1); });
+Key.on('right', modifiers, function () { moveLateral(2, 1); });
 Key.on('up', modifiers, function () { moveUp(); });
 Key.on('down', modifiers, function () { moveDown(); });
 Key.on('return', modifiers, function () { maximize(); });
