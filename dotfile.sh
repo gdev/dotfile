@@ -93,8 +93,7 @@ brew cask install phoenix
 # Phoenix window manager
 ###################################################################################
 
-wget https://raw.githubusercontent.com/gdev/dotfile/master/files/phoenix.js --output-document .phoenix.js
-brew cask install phoenix
+wget -O ~/.phoenix.js https://github.com/gdev/phoenix-config
 osascript -e 'tell application "System Events" to make login item at end with properties {name: "Phoenix",path:"/Applications/Phoenix.app", hidden:false}'
 
 ###################################################################################
