@@ -7,10 +7,6 @@ Phoenix.set({
     'openAtLogin': true
 });
 
-// Positions (vertical) per screen array.
-// Can be adjusted for very wide or narrow displays.
-var positionsPerScreen = [2, 2]; 
-
 // Modifier keys
 var modifiers = ["ctrl", "alt"];
 // var commandModifiers = ["ctrl", "alt", "command"];
@@ -76,88 +72,6 @@ function moveDown() {
     }
 }
 
-function getHorizontalPosition(window, positionsPerScreen) {
-    for (screenIndex = 0; screenIndex < Screen.all().length; screenIndex++) {
-        for (positionIndex = 0; positionIndex < positionsPerScreen; positionIndex++) {
-            var dimensions = dimensionForPosition(screenIndex, positionIndex, positionsPerScreen);
-            if (window.frame().x >= dimensions.x && window.frame().x < (dimensions.x + dimensions.width)) {
-                var position = {
-                    screenIndex: screenIndex,
-                    positionIndex: positionIndex
-                };
-                return position;
-            }
-        }
-    }
-}
-
-function frameForPosition(screenIndex, positionIndex, ofPosition) {
-    var dimensions = dimensionForPosition(screenIndex, positionIndex, ofPosition);
-    return {
-        x: dimensions.x,
-        y: Screen.all()[screenIndex].visibleFrame().y,
-        width: dimensions.width,
-        height: Screen.all()[screenIndex].visibleFrame().height
-    };
-}
-
-function dimensionForPosition(screenIndex, positionIndex, ofPositions) {
-    var screen = Screen.all()[screenIndex];
-    var positionWidth = screen.frame().width / ofPositions;
-    var dimensions = {
-        x: screen.frame().x + (positionWidth * positionIndex),
-        width: positionWidth
-    };
-    return dimensions;
-}
-
-function isPointInFrame(point, rectangle) {
-    return point.x >= rectangle.x && point.x <= rectangle.x + rectangle.width &&
-        point.y >= rectangle.y && point.y <= rectangle.y + rectangle.height
-}
-
-function moveWindowToPosition(window, screenIndex, positionIndex, ofPositions) {
-    var startFrame = window.frame()
-    let startLocation = Mouse.location();
-    var targetFrame = dimensionForPosition(screenIndex, positionIndex, ofPositions);
-    var shouldMoveMouse = isPointInFrame(startLocation, startFrame); 
-    window.setFrame({
-        x: targetFrame.x,
-        y: window.frame().y,
-        width: targetFrame.width,
-        height: window.frame().height
-    });
-    if (shouldMoveMouse) {
-        var startOffsetX = startLocation.x - startFrame.x;
-        var startOffsetY = startLocation.y - startFrame.y;
-        Mouse.move({
-            x: window.frame().x + startOffsetX,
-            y: window.frame().y + startOffsetY
-        }); 
-    }
-}
-
-function moveRight(positionsPerScreen) {
-    var window = getCurrentWindow();
-    var position = getHorizontalPosition(window, positionsPerScreen);
-    if (position.positionIndex < positionsPerScreen - 1) {
-        moveWindowToPosition(window, position.screenIndex, ++position.positionIndex, positionsPerScreen);
-    } else if (position.screenIndex < Screen.all().length - 1) {
-        moveWindowToPosition(window, ++position.screenIndex, 0, positionsPerScreen);
-    }
-}
-
-function moveLeft(positionsPerScreen) {
-    var window = getCurrentWindow();
-    var position = getHorizontalPosition(window, positionsPerScreen);
-    if (position.positionIndex > 0) {
-        moveWindowToPosition(window, position.screenIndex, --position.positionIndex, positionsPerScreen);
-    } else if (position.screenIndex > 0) {
-        moveWindowToPosition(window, 0, positionsPerScreen - 1, positionsPerScreen);
-    }
-    
-}
-
 function maximize() {
     var window = getCurrentWindow();
     var screen = window.screen();
@@ -168,9 +82,6 @@ function maximize() {
         height: screen.frame().height
     });
 }
-
-// Lauch apps...
-Key.on('t', modifiers, function () { callApp('Terminal'); });
 
 function orderedScreens() {
     let screens = Screen.all().sort(function(a, b) { return a.visibleFrame().x - b.visibleFrame().x });
@@ -188,7 +99,7 @@ function frameForSector(sector, sectorsPerScreen) {
     let sectorWidth = screen.frame().width / sectorsPerScreen;
     let sectorInScreen = sector % sectorsPerScreen;
     let origin = screen.frame().x + sectorWidth * sectorInScreen; 
-    let frame = {x: origin, y: screen.visibleFrame().y, width: sectorWidth, height: screen.visibleFrame().height};
+    let frame = {x: origin, y: screen.flippedVisibleFrame().y, width: sectorWidth, height: screen.visibleFrame().height};
     return frame;
 };
 
@@ -202,22 +113,36 @@ function moveLateral(sectorsPerScreen, sectorMovement) {
         };
     };
     if (currentSector != null) {
+        // Check for special case of being in first sector of a screen, but not occupying it fully.
+        // If that's the case, set sectorMovement to zero to fill the sector!
+        let currentFrame = frameForSector(currentSector, sectorsPerScreen);
+        if (currentFrame.x < window.frame().x || currentFrame.x == window.frame().x && currentFrame.width != window.frame().width && sectorMovement == -1) {
+            sectorMovement = 0;
+        };
         let newSector = currentSector + sectorMovement;
         if (newSector < 0) newSector = 0;
         if (newSector >= totalSectors(sectorsPerScreen)) newSector = totalSectors(sectorsPerScreen) - 1;
         let sectorFrame = frameForSector(newSector, sectorsPerScreen);
-        var y = window.frame().y
-        var height = window.frame().height
+        // If the window is "touching" the top of the current sector's visibleFrame,
+        // make sure it stays "touching" in the newFrame. This allows you to go between 
+        // multiple screens of different heights...
+        var y = window.frame().y;
+        var height = window.frame().height;
+        // Hug top of screen...
+        if (y == window.screen().flippedVisibleFrame().y) { 
+            y = sectorFrame.y;
+            // Hug bottom...
+            let heightDifference = sectorFrame.height - window.screen().flippedVisibleFrame().height;
+            if (heightDifference != 0) height = height + heightDifference; // logic not necessary; but clear!
+        }
+        // if (window.frame().y + window.frame().height == window.screen().flippedVisibleFrame().height) {
+        // } height = sectorFrame.height
         window.setFrame({ x: sectorFrame.x, y: y, width: sectorFrame.width, height: height });
     }
 }
 
-Key.on('d', modifiers, function () {
-    Phoenix.log("DEBUG");
-    var sectorsPerScreen = 2;
-    var sectorMovement = 1; // -1, 0 or 1
-    moveLateral(sectorsPerScreen, sectorMovement);
-});
+// Lauch apps...
+Key.on('t', modifiers, function () { callApp('Terminal'); });
 
 // Move windows...
 Key.on('left', modifiers, function () { moveLateral(2, -1); });
@@ -237,14 +162,3 @@ Event.on('appDidLaunch', (app) => {
     // app.mainWindow().setFrame(frameForPosition(screenIndex, 0, 2));    
 });
 
-// Magic apps
-
-// Utility functions
-
-Array.prototype.swap = function(index_A, index_B) {
-    let input = this;
- 
-    let temp = input[index_A];
-    input[index_A] = input[index_B];
-    input[index_B] = temp;
-}
