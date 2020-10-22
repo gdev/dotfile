@@ -5,11 +5,6 @@
 # bash <(curl https://raw.githubusercontent.com/gdevries/dotfile/master/dotfile.sh)
 ###################################################################################
 
-# echo "INSTRUCTIONS"
-# echo "============"
-# echo "Exit zsh at the first '~' prompt."
-# echo "Restart is required for all settings to take effect."
-
 # Ask for sudo
 if sudo --validate; then
     # Keep-alive
@@ -74,9 +69,8 @@ fi
 # Casks
 ###################################################################################
 
-#brew cask install downie
-#brew cask install vyprvpn
-#brew cask install easyeda
+brew cask install downie
+brew cask install easyeda
 brew cask install cleanmymac
 brew cask install netnewswire
 brew cask install sketch
@@ -86,7 +80,6 @@ brew cask install vlc
 brew cask install bricklink-studio 
 brew cask install sf-symbols 
 brew cask install nova
-brew cask install tunnelbear
 brew cask install phoenix
 
 ###################################################################################
@@ -101,24 +94,15 @@ osascript -e 'tell application "System Events" to make login item at end with pr
 ###################################################################################
 
 brew install mas
-#mas lucky Magnet
 mas lucky "1Password 7"
-open "/Applications/1Password 7.app"
 mas lucky "iStat Menus"
 mas lucky 1Blocker
 mas lucky Cardhop
-#mas lucky LanScan
-#mas lucky Acorn
-#mas lucky DiskMate
-#mas lucky Airmail
-#mas lucky Fantastical
-#mas lucky Tampermonkey
+mas lucky Acorn
+mas lucky Airmail
+mas lucky Fantastical
+mas lucky Tampermonkey
 mas lucky Screens
-#mas install 488764545 # The Clock
-
-# Create some login items...
-osascript -e 'tell application "System Events" to make login item at end with properties {name: "iStat Menus",path:"/Applications/iStat Menus.app", hidden:false}'
-osascript -e 'tell application "System Events" to make login item at end with properties {name: "Cardhop",path:"/Applications/Cardhop.app", hidden:false}'
 
 ###############################################################################
 # Mac App Store                                                               #
@@ -181,7 +165,7 @@ defaults write com.apple.dock minimize-to-application -bool true
 ###############################################################################
 
 # Disable Time Machine's pop-up message whenever an external drive is plugged in
-# Does't work? sudo defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+# Doesn't work? sudo defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Show stuff I like on the desktop
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
@@ -397,4 +381,4 @@ killall Finder
 echo "Installing Xcode can take awhile. All other config done..."
 mas lucky Xcode
 
-echo "Rebooting to complete setup!"
+echo "Reboot to complete setup!"
