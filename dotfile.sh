@@ -109,6 +109,8 @@ mas lucky Pages
 mas lucky "Microsoft Word"
 mas lucky "Microsoft PowerPoint"
 mas lucky "Microsoft Excel"
+mas lucky Twitter
+mas lucky "TweetDeck by Twitter"
 
 ###############################################################################
 # Mac App Store                                                               #
