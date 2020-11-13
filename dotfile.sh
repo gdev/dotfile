@@ -96,9 +96,9 @@ osascript -e 'tell application "System Events" to make login item at end with pr
 brew install mas
 mas lucky "1Password 7"
 mas lucky "iStat Menus"
-mas lucky 1Blocker
+mas lucky "1Blocker for Safari"
 mas lucky Cardhop
-mas lucky Acorn
+mas lucky "Acorn 6 Image Editor"
 #mas lucky Airmail
 mas lucky Fantastical
 mas lucky Tampermonkey
