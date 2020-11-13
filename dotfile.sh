@@ -2,7 +2,7 @@
 
 ###################################################################################
 # To use...
-# bash <(curl https://raw.githubusercontent.com/gdevries/dotfile/master/dotfile.sh)
+# bash <(curl https://raw.githubusercontent.com/gdev/dotfile/master/dotfile.sh)
 ###################################################################################
 
 # Ask for sudo
