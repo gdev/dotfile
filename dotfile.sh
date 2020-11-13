@@ -99,10 +99,16 @@ mas lucky "iStat Menus"
 mas lucky 1Blocker
 mas lucky Cardhop
 mas lucky Acorn
-mas lucky Airmail
+#mas lucky Airmail
 mas lucky Fantastical
 mas lucky Tampermonkey
 mas lucky Screens
+mas lucky "Final Cut Pro"
+mas lucky Numbers
+mas lucky Pages
+mas lucky "Microsoft Word"
+mas lucky "Microsoft PowerPoint"
+mas lucky "Microsoft Excel"
 
 ###############################################################################
 # Mac App Store                                                               #
