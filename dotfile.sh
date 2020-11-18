@@ -94,23 +94,23 @@ osascript -e 'tell application "System Events" to make login item at end with pr
 ###################################################################################
 
 brew install mas
-mas lucky "1Password 7"
-mas lucky "iStat Menus"
-mas lucky "1Blocker for Safari"
-mas lucky Cardhop
-mas lucky "Acorn 6 Image Editor"
-#mas lucky Airmail
-mas lucky Fantastical
-mas lucky Tampermonkey
-mas lucky Screens
-mas lucky "Final Cut Pro"
-mas lucky Numbers
-mas lucky Pages
-mas lucky "Microsoft Word"
-mas lucky "Microsoft PowerPoint"
-mas lucky "Microsoft Excel"
-mas lucky Twitter
-mas lucky "TweetDeck by Twitter"
+mas install 1333542190 # "1Password 7"
+mas install 1319778037 # "iStat Menus"
+mas install 1107421413 # "1Blocker for Safari"
+mas install 1290358394 # lucky Cardhop
+# mas lucky "Acorn 6 Image Editor"
+# mas lucky Airmail
+mas install 975937182 # Fantastical
+mas install 1482490089 # Tampermonkey
+mas install 1224268771 # Screens
+mas install 424389933 # "Final Cut Pro"
+mas install 409203825 # Numbers
+mas install 409201541 # Pages
+mas install 462054704 # "Microsoft Word"
+mas install 462062816 # "Microsoft PowerPoint"
+mas install 462058435 # "Microsoft Excel"
+mas install 1482454543 # Twitter
+mas install 485812721 # "TweetDeck by Twitter"
 
 ###############################################################################
 # Mac App Store                                                               #
@@ -387,6 +387,6 @@ killall Finder
 ###############################################################################
 
 echo "Installing Xcode can take awhile. All other config done..."
-mas lucky Xcode
+mas install 497799835 # Xcode
 
 echo "Reboot to complete setup!"
