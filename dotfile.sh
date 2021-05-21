@@ -22,7 +22,7 @@ fi
 
 echo "Installing Homebrew..."
 if ! hash brew 2>/dev/null; then
-    if /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null; then
+    if /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" < /dev/null; then
         echo "Homebrew installation succeeded."
     else
         echo "Homebrew installation failed."
@@ -76,10 +76,10 @@ brew cask install netnewswire
 brew cask install sketch
 brew cask install google-chrome
 brew cask install vlc
-#brew cask install bartender
+brew cask install bartender
 brew cask install bricklink-studio 
 brew cask install sf-symbols 
-brew cask install nova
+brew cask install visual-studio-code
 brew cask install phoenix
 
 ###################################################################################
@@ -110,7 +110,7 @@ mas install 462054704 # "Microsoft Word"
 mas install 462062816 # "Microsoft PowerPoint"
 mas install 462058435 # "Microsoft Excel"
 mas install 1482454543 # Twitter
-mas install 485812721 # "TweetDeck by Twitter"
+# mas install 485812721 # "TweetDeck by Twitter"
 
 ###############################################################################
 # Mac App Store                                                               #
