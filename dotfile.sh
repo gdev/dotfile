@@ -30,6 +30,9 @@ if ! hash brew 2>/dev/null; then
     fi
 fi
 
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/gdev/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 brew install wget
 
 ###################################################################################
