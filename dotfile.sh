@@ -99,12 +99,12 @@ osascript -e 'tell application "System Events" to make login item at end with pr
 brew install mas
 mas install 1333542190 # "1Password 7"
 mas install 1319778037 # "iStat Menus"
-mas install 1107421413 # "1Blocker for Safari"
+mas install 1365531024 # "1Blocker for Safari"
 mas install 1290358394 # lucky Cardhop
 # mas lucky "Acorn 6 Image Editor"
 # mas lucky Airmail
 mas install 975937182 # Fantastical
-mas install 1482490089 # Tampermonkey
+# mas install 1482490089 # Tampermonkey
 mas install 1224268771 # Screens
 mas install 424389933 # "Final Cut Pro"
 mas install 409203825 # Numbers
