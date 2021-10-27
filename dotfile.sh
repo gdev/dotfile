@@ -69,18 +69,18 @@ fi
 # Casks
 ###################################################################################
 
-brew cask install downie
-brew cask install easyeda
-brew cask install cleanmymac
-brew cask install netnewswire
-brew cask install sketch
-brew cask install google-chrome
-brew cask install vlc
-brew cask install bartender
-brew cask install bricklink-studio 
-brew cask install sf-symbols 
-brew cask install visual-studio-code
-brew cask install phoenix
+brew install downie
+# brew cask install easyeda
+brew install cleanmymac
+brew install netnewswire
+brew install sketch
+brew install google-chrome
+brew install vlc
+brew install bartender
+# brew cask install bricklink-studio 
+brew install sf-symbols 
+brew install visual-studio-code
+brew install phoenix
 
 ###################################################################################
 # Phoenix window manager
@@ -110,6 +110,8 @@ mas install 462054704 # "Microsoft Word"
 mas install 462062816 # "Microsoft PowerPoint"
 mas install 462058435 # "Microsoft Excel"
 mas install 1482454543 # Twitter
+mas install 1224268771 # screens
+mas install 1482454543 # twitter
 # mas install 485812721 # "TweetDeck by Twitter"
 
 ###############################################################################
