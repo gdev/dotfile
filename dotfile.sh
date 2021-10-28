@@ -40,7 +40,7 @@ brew install wget
 ###################################################################################
 
 mkdir ~/GitHub
-brew cask install github
+brew install github
 
 ###################################################################################
 # Hostname and .dotfiles storage
@@ -101,10 +101,11 @@ mas install 1333542190 # "1Password 7"
 mas install 1319778037 # "iStat Menus"
 mas install 1365531024 # "1Blocker for Safari"
 mas install 1290358394 # lucky Cardhop
+mas install 1544743900 # Hush
+mas install 1147396723 # WhatsApp
+mas install 918858936 # Airmail
 # mas lucky "Acorn 6 Image Editor"
-# mas lucky Airmail
 mas install 975937182 # Fantastical
-# mas install 1482490089 # Tampermonkey
 mas install 1224268771 # Screens
 mas install 424389933 # "Final Cut Pro"
 mas install 409203825 # Numbers
@@ -115,7 +116,6 @@ mas install 462058435 # "Microsoft Excel"
 mas install 1482454543 # Twitter
 mas install 1224268771 # screens
 mas install 1482454543 # twitter
-# mas install 485812721 # "TweetDeck by Twitter"
 
 ###############################################################################
 # Mac App Store                                                               #
